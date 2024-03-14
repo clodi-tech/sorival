@@ -3,8 +3,8 @@
 @import "tailwindcss/utilities";
 
 body {
-  color: white;
-  background: black;
+  color: #BBBBBB;
+  background: #000000;
 }
 
 .parent {
