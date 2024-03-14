@@ -10,36 +10,40 @@ body {
 .parent {
   display: grid;
   grid-template: auto 1fr auto / auto 1fr auto;
-  border: 1px solid white;
 }
 
 header {
   padding: 2rem;
   grid-column: 1 / 4;
-  border: 1px solid white;
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .left-side {
   padding: 2rem;
   grid-column: 1 / 2;
-  border: 1px solid white;
 }
 
 main {
   padding: 2rem;
   grid-column: 2 / 3;
-  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .right-side {
   padding: 2rem;
   grid-column: 3 / 4;
-  border: 1px solid white;
 }
 
 footer {
   padding: 2rem;
   grid-column: 1 / 4;
-  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
