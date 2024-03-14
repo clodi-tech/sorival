@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from 'graphql-request';
+import { unstable_noStore as noStore } from 'next/cache';
 
 // read the api url
 const apiUrl = process.env.SORARE_API_URL;
@@ -10,6 +11,8 @@ if (!apiUrl) {
 const graphQLClient = new GraphQLClient(apiUrl, { headers: {} });
 
 export async function nextGame() {
+    noStore();
+
     // define the query
     const test = gql`{ football { rivals { nextGame { cap formationKnown slug } } } }`;
 
