@@ -9,7 +9,7 @@ if (!apiUrl) {
 // create the client
 const graphQLClient = new GraphQLClient(apiUrl, { headers: {} });
 
-export async function fetch() {
+export async function nextGame() {
     // define the query
     const test = gql`{ football { rivals { nextGame { cap formationKnown slug } } } }`;
 

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { fetch } from "./lib/action";
+import { nextGame } from "./lib/actions";
 
 export default async function Home() {
-  const data: any = await fetch();
+  const data: any = await nextGame();
 
   // prepare the data
   const rivals = data.football.rivals.nextGame;

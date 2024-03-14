@@ -8,8 +8,8 @@ const font = Rajdhani({
 });
 
 export const metadata: Metadata = {
-  title: "finboss",
-  description: "handle your trades like a boss",
+  title: "dreamrare",
+  description: "build your sorare dream team",
 };
 
 export default function RootLayout({
