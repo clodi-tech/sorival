@@ -34,8 +34,8 @@ export async function draftablePlayers(slug: string) {
 
     // define the query
     const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { draftablePlayers {
-                ... on FootballRivalsDraftablePlayer { capValue position licensed player { displayName activeClub { name } } }
-                ... on FootballRivalsDraftableCard { capValue position player { displayName activeClub { name } } } } } } } }`;
+                ... on FootballRivalsDraftablePlayer { id capValue position licensed player { displayName activeClub { name } } }
+                ... on FootballRivalsDraftableCard { id capValue position player { displayName activeClub { name } } } } } } } }`;
 
     try {
         // send the request
