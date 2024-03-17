@@ -1,7 +1,7 @@
-export default function Game({ cap, slug }) {
+export default function Game(props) {
     return (
         <div>
-            <div>{slug} {cap}</div>
+            <div>{props.slug} {props.cap}</div>
         </div>
     )
 }

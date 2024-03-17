@@ -10,11 +10,11 @@ if (!apiUrl) {
 // create the client
 const graphQLClient = new GraphQLClient(apiUrl, { headers: {} });
 
-export async function nextGame() {
+export async function nextGames() {
     noStore();
 
     // define the query
-    const test = gql`{ football { rivals { upcomingGames (onlyInvited: false) { cap formationKnown slug } } } }`;
+    const test = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug } } } }`;
 
     try {
         // send the request

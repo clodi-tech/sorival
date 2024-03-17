@@ -1,8 +1,8 @@
-import { nextGame } from "../lib/actions";
+import { nextGames } from "../lib/actions";
 import Game from "../lib/game";
 
 export default async function Main() {
-    const data: any = await nextGame();
+    const data: any = await nextGames();
 
     // prepare the data
     const games = data.football.rivals.upcomingGames;
@@ -10,9 +10,9 @@ export default async function Main() {
 
     return (
         <main>
-            <div>Upcoming games</div>
+            <div>upcoming games</div>
             {gamesWithFormation.map((game: any) => (
-                <Game cap={game.cap} slug={game.slug} />
+                <Game key={game.id} {...game} />
             ))}
         </main>
     );
