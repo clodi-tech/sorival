@@ -19,7 +19,12 @@ export default async function Main() {
                         </Link>
                     ))}
                 </>
-            ) : <div>no upcoming games.<br></br>come back later.</div>}
+            ) : (
+                <>
+                    <div>no upcoming games.</div>
+                    <div>come back later.</div>
+                </>
+            )}
         </main>
     );
 }
