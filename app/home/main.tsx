@@ -1,5 +1,5 @@
 import { nextGames } from "../lib/actions";
-import Game from "../lib/game";
+import Link from "next/link";
 
 export default async function Main() {
     const data: any = await nextGames();
@@ -10,10 +10,14 @@ export default async function Main() {
 
     return (
         <main>
-            <div>upcoming games</div>
-            {gamesWithFormation.map((game: any) => (
-                <Game key={game.id} {...game} />
-            ))}
+            {gamesWithFormation.length > 0 ? (
+                <>
+                    <div>upcoming games</div>
+                    {gamesWithFormation.map((game: any) => (
+                        <Link href={`/${game.slug}/players`}>{game.slug} {game.cap}</Link>
+                    ))}
+                </>
+            ) : <div>no upcoming games.<br></br>come back later.</div>}
         </main>
     );
 }
