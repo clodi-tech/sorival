@@ -1,19 +1,19 @@
 import { nextGame } from "../lib/actions";
+import Game from "../lib/game";
 
 export default async function Main() {
     const data: any = await nextGame();
 
     // prepare the data
-    const rivals = data.football.rivals.nextGame;
-    const cap = rivals.cap;
-    const formationKnown = String(rivals.formationKnown);
-    const slug = rivals.slug;
+    const games = data.football.rivals.upcomingGames;
+    const gamesWithFormation = games.filter((game: any) => game.formationKnown);
 
     return (
         <main>
-            <div>{slug}</div>
-            <div>next game cap {cap}</div>
-            <div>formation known: {formationKnown}</div>
+            <div>Upcoming games</div>
+            {gamesWithFormation.map((game: any) => (
+                <Game cap={game.cap} slug={game.slug} />
+            ))}
         </main>
     );
 }

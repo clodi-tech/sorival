@@ -14,7 +14,7 @@ export async function nextGame() {
     noStore();
 
     // define the query
-    const test = gql`{ football { rivals { nextGame { cap formationKnown slug } } } }`;
+    const test = gql`{ football { rivals { upcomingGames (onlyInvited: false) { cap formationKnown slug } } } }`;
 
     try {
         // send the request
