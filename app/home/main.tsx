@@ -14,7 +14,9 @@ export default async function Main() {
                 <>
                     <div>upcoming games</div>
                     {gamesWithFormation.map((game: any) => (
-                        <Link href={`/${game.slug}/players`}>{game.slug} {game.cap}</Link>
+                        <Link href={`/${game.slug}/players`} key={game.id}>
+                            {game.slug} {game.cap}
+                        </Link>
                     ))}
                 </>
             ) : <div>no upcoming games.<br></br>come back later.</div>}
