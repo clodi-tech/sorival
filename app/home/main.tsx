@@ -13,7 +13,7 @@ export default async function Main() {
     const gamesWithFormation = games.filter((game: any) => game.formationKnown);
 
     // check picture url for home and away teams and add default picture if missing
-    games.forEach((game: any) => {
+    gamesWithFormation.forEach((game: any) => {
         if (!game.game.homeTeam.pictureUrl) {
             game.game.homeTeam.pictureUrl = DEFAULT_PIC_URL;
         }
@@ -24,10 +24,10 @@ export default async function Main() {
 
     return (
         <main>
-            {games.length > 0 ? (
+            {gamesWithFormation.length > 0 ? (
                 <>
                     <div>upcoming games</div>
-                    {games.map((game: any) => (
+                    {gamesWithFormation.map((game: any) => (
                         <Link href={`/${game.slug}/players`} key={game.id} className="flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1">
                             <div className="flex flex-col items-center">
                                 <Image src={game.game.homeTeam.pictureUrl} alt="home logo" width={SIZE} height={SIZE} />
