@@ -10,16 +10,12 @@ export default async function Main() {
 
     // prepare the data
     const games = data.football.rivals.upcomingGames;
-    const gamesWithFormation = games.filter((game: any) => game.formationKnown);
-
-    // check picture url for home and away teams and add default picture if missing
-    gamesWithFormation.forEach((game: any) => {
-        if (!game.game.homeTeam.pictureUrl) {
-            game.game.homeTeam.pictureUrl = DEFAULT_PIC_URL;
-        }
-        if (!game.game.awayTeam.pictureUrl) {
-            game.game.awayTeam.pictureUrl = DEFAULT_PIC_URL;
-        }
+    const gamesWithFormation = games
+    .filter((game: any) => game.formationKnown)
+    .map((game: any) => {
+        game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_PIC_URL;
+        game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_PIC_URL;
+        return game;
     });
 
     const GameLink = ({ game }: { game: any }) => (
