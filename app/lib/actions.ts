@@ -15,7 +15,7 @@ export async function nextGames() {
     noStore();
 
     // define the query
-    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id formationKnown slug game { awayTeam { ...on Club { name } ... on NationalTeam { name } } homeTeam { ...on Club { name } ... on NationalTeam { name } } } } } } }`;
+    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { awayTeam { ...on Club { name pictureUrl } ... on NationalTeam { name pictureUrl } } homeTeam { ...on Club { name pictureUrl } ... on NationalTeam { name pictureUrl } } } } } } }`;
 
     try {
         // send the request
