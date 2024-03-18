@@ -13,8 +13,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const awayTeam = game.game.awayTeam;
     homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_PIC_URL;
     awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_PIC_URL;
-    const homeLineup = game.game.homeFormation.startingLineup;
-    const awayLineup = game.game.awayFormation.startingLineup;
+    const homeLineup = game.game.homeFormation.startingLineup.flat();
+    const awayLineup = game.game.awayFormation.startingLineup.flat();
 
     // render the teams on top and the home players on the left, away players on the right
     return (
@@ -38,7 +38,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                             <Image src={player.squaredPictureUrl} alt='player pic' width={SIZE} height={SIZE} className="mb-2" />
                             <div className="flex justify-between w-full">
                                 <span>{player.lastFifteenSo5Appearances}</span>
-                                <span>{player.name}</span>
+                                <span>{player.displayName}</span>
                             </div>
                             <span className="text-sm mt-2">{player.position}</span>
                         </div>
@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                             <Image src={player.squaredPictureUrl} alt='player pic' width={SIZE} height={SIZE} className="mb-2" />
                             <div className="flex justify-between w-full">
                                 <span>{player.lastFifteenSo5Appearances}</span>
-                                <span>{player.name}</span>
+                                <span>{player.displayName}</span>
                             </div>
                             <span className="text-sm mt-2">{player.position}</span>
                         </div>
