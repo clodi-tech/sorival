@@ -14,13 +14,11 @@ const graphQLClient = new GraphQLClient(apiUrl, { headers: {} });
 export async function nextGames() {
     noStore();
 
-    // define the query
     const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { awayTeam { 
         ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } homeTeam { 
         ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } } } } } }`;
 
     try {
-        // send the request
         const data = await graphQLClient.request(query);
         return data;
     } 
@@ -30,17 +28,15 @@ export async function nextGames() {
     }
 }
 
-// get draftable players
-export async function draftablePlayers(slug: string) {
+// get starting lineup
+export async function startingLineup(slug: string) {
     noStore();
 
-    // define the query
-    const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { draftablePlayers {
-        ... on FootballRivalsDraftablePlayer { id capValue position licensed player { displayName activeClub { name } } }
-        ... on FootballRivalsDraftableCard { id capValue position player { displayName activeClub { name } } } } } } } }`;
+    const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { id cap game {
+        homeFormation { startingLineup { id displayName position lastFifteenSo5Appearances squaredPictureUrl } }
+        awayFormation { startingLineup { id displayName position lastFifteenSo5Appearances squaredPictureUrl } } } } } } }`;
 
     try {
-        // send the request
         const data = await graphQLClient.request(query, { slug });
         return data;
     } 
