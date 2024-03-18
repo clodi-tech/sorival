@@ -25,10 +25,16 @@ export default async function Main() {
                 <>
                     <div>upcoming games</div>
                     {games.map((game: any) => (
-                        <Link href={`/${game.slug}/players`} key={game.id}>
-                            <Image src={game.game.homeTeam.pictureUrl} alt="home logo" width={25} height={25} />
-                            <Image src={game.game.awayTeam.pictureUrl} alt="away logo" width={25} height={25} />
-                            {game.game.homeTeam.name} - VS - {game.game.awayTeam.name}
+                        <Link href={`/${game.slug}/players`} key={game.id} className="flex justify-center items-center border border-gray-600 rounded-lg p-3 m-1">
+                            <div className="flex flex-col items-center">
+                                <Image src={game.game.homeTeam.pictureUrl} alt="home logo" width={25} height={25} />
+                                <span>{game.game.homeTeam.name}</span>
+                            </div>
+                            <span className="mx-2">VS</span>
+                            <div className="flex flex-col items-center">
+                                <Image src={game.game.awayTeam.pictureUrl} alt="away logo" width={25} height={25} />
+                                <span>{game.game.awayTeam.name}</span>
+                            </div>
                         </Link>
                     ))}
                 </>
