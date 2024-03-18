@@ -10,12 +10,12 @@ export default async function Main() {
 
     return (
         <main>
-            {gamesWithFormation.length > 0 ? (
+            {games.length > 0 ? (
                 <>
                     <div>upcoming games</div>
-                    {gamesWithFormation.map((game: any) => (
+                    {games.map((game: any) => (
                         <Link href={`/${game.slug}/players`} key={game.id}>
-                            {game.slug} {game.cap}
+                            {game.game.awayTeam.name} - VS - {game.game.homeTeam.name}
                         </Link>
                     ))}
                 </>
