@@ -15,7 +15,9 @@ export async function nextGames() {
     noStore();
 
     // define the query
-    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { awayTeam { ...on Club { name pictureUrl } ... on NationalTeam { name pictureUrl } } homeTeam { ...on Club { name pictureUrl } ... on NationalTeam { name pictureUrl } } } } } } }`;
+    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { awayTeam { 
+        ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } homeTeam { 
+        ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } } } } } }`;
 
     try {
         // send the request
@@ -34,8 +36,8 @@ export async function draftablePlayers(slug: string) {
 
     // define the query
     const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { draftablePlayers {
-                ... on FootballRivalsDraftablePlayer { id capValue position licensed player { displayName activeClub { name } } }
-                ... on FootballRivalsDraftableCard { id capValue position player { displayName activeClub { name } } } } } } } }`;
+        ... on FootballRivalsDraftablePlayer { id capValue position licensed player { displayName activeClub { name } } }
+        ... on FootballRivalsDraftableCard { id capValue position player { displayName activeClub { name } } } } } } } }`;
 
     try {
         // send the request
