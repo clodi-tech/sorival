@@ -37,7 +37,7 @@ export default async function Main() {
             {gamesWithFormation.length > 0 ? (
                 <>
                     <div>upcoming games</div>
-                    {gamesWithFormation.map((game: any) => <GameLink game={game} />)}
+                    {gamesWithFormation.map((game: any) => <GameLink key={game.id} game={game} />)}
                 </>
             ) : (
                 <>
