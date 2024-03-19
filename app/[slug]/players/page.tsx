@@ -83,14 +83,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
                     <div className='flex justify-center items-center'>
                         {lineup.players.map((player, index) => (
-                            <div key={index}>
+                            <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
                                 <Image src={player.pictureUrl} alt='player picture' width={50} height={50} />
                                 <span>{player.capValue}</span>
-                                <span>{player.position}</span>
                             </div>
                         ))}
                     </div>
-                    <span>{lineup.totalCap}</span>
+                    <div className='flex justify-center items-center'>
+                        <span>{lineup.totalCap}</span>
+                    </div>
                 </div>
             ))}
         </main>
