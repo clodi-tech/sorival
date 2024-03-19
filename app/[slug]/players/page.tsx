@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     <div className='flex justify-center items-center'>
                         {lineup.players.map((player, index) => (
                             <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
-                                <Image src={player.pictureUrl} alt='player picture' width={50} height={50} />
+                                <Image src={player.pictureUrl} alt='player picture' width={50} height={81} />
                                 <span>{player.capValue}</span>
                             </div>
                         ))}
