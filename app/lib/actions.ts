@@ -35,8 +35,8 @@ export async function startingLineup(slug: string) {
     const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { id cap game {
         homeTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
         awayTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
-        homeFormation { startingLineup { id displayName position lastFifteenSo5Appearances squaredPictureUrl } }
-        awayFormation { startingLineup { id displayName position lastFifteenSo5Appearances squaredPictureUrl } } } } } } }`;
+        homeFormation { startingLineup { id } }
+        awayFormation { startingLineup { id } } } } } } }`;
 
     try {
         const data = await graphQLClient.request(query, { slug });

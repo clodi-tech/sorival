@@ -16,6 +16,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
     const homeLineup = game.game.homeFormation.startingLineup.flat();
     const awayLineup = game.game.awayFormation.startingLineup.flat();
+    const startingIds = homeLineup.concat(awayLineup).map((player: any) => player.id);
 
     return (
         <main>
@@ -31,6 +32,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
+            <div>{JSON.stringify(startingIds, null, 2)}</div>
         </main>
     );
 }
