@@ -36,7 +36,10 @@ export async function startingLineup(slug: string) {
         homeTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
         awayTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
         homeFormation { startingLineup { id } }
-        awayFormation { startingLineup { id } } } } } } }`;
+        awayFormation { startingLineup { id } } }
+        draftablePlayers { 
+        ... on FootballRivalsDraftablePlayer { capValue pictureUrl position player { id } }
+        ... on FootballRivalsDraftableCard { capValue pictureUrl position player { id } } } } } } }`;
 
     try {
         const data = await graphQLClient.request(query, { slug });
