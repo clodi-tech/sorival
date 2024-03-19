@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const allMF = allPlayers.filter((player: any) => player.position === 'Midfielder');
     const allFW = allPlayers.filter((player: any) => player.position === 'Forward');
     
-    // generate all possible lineups with one player for position
+    // generate all possible lineups with one player per position
     const lineups = [];
     for (const gk of allGK) {
         for (const df of allDF) {
@@ -34,7 +34,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     // generate the extra players
                     // cannot be goalkeeper, cannot be the same as the other players
                     let extra = allPlayers.filter((player: any) => player.position != 'Goalkeeper');
-                    extra = allPlayers.filter((player: any) => ![df, mf, fw].includes(player));
+                    extra = extra.filter((player: any) => ![df, mf, fw].includes(player));
 
                     for (const ex of extra) {
                         // sum the cap of the lineup
@@ -48,7 +48,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                             // count the number of players from the away team
                             const awayCount = [gk, df, mf, fw, ex].filter((player: any) => awayIds.includes(player.player.id)).length;
                             lineups.push({
-                                'lineup': [gk, df, mf, fw, ex],
+                                'players': [gk, df, mf, fw, ex],
                                 'totalCap': cap,
                                 'homeCount': homeCount,
                                 'awayCount': awayCount
@@ -59,6 +59,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
             }
         }
     }
+
+    const topHomeLineups = lineups
+    .filter(lineup => lineup.homeCount === 5)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, 5);
 
     return (
         <main>
@@ -74,7 +79,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
-            <div className='text-center m-4'>{JSON.stringify(lineups, null, 2)}</div>
+            {topHomeLineups.map((lineup, index) => (
+                <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
+                    <div className='flex justify-center items-center'>
+                        {lineup.players.map((player, index) => (
+                            <div key={index}>
+                                <Image src={player.pictureUrl} alt='player picture' width={50} height={50} />
+                                <span>{player.capValue}</span>
+                                <span>{player.position}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <span>{lineup.totalCap}</span>
+                </div>
+            ))}
         </main>
     );
 }
