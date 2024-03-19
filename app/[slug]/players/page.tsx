@@ -17,6 +17,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const homeIds = game.game.homeFormation.startingLineup.flat().map((player: any) => player.id);
     const awayIds = game.game.awayFormation.startingLineup.flat().map((player: any) => player.id);
     const draftablePlayers = game.draftablePlayers;
+    const homePlayers = draftablePlayers.filter((player: any) => homeIds.includes(player.player.id));
+    const awayPlayers = draftablePlayers.filter((player: any) => awayIds.includes(player.player.id));
 
     return (
         <main>
@@ -33,8 +35,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </div>
             <Slider />
             <div className='text-center m-4'>{JSON.stringify(homeIds, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(homePlayers, null, 2)}</div>
             <div className='text-center m-4'>{JSON.stringify(awayIds, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(draftablePlayers, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(awayPlayers, null, 2)}</div>
         </main>
     );
 }
