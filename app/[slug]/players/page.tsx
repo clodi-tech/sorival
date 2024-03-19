@@ -18,16 +18,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const awayIds = game.game.awayFormation.startingLineup.flat().map((player: any) => player.id);
     const homePlayers = game.draftablePlayers.filter((player: any) => homeIds.includes(player.player.id));
     const awayPlayers = game.draftablePlayers.filter((player: any) => awayIds.includes(player.player.id));
+    const allPlayers = homePlayers.concat(awayPlayers);
 
-    const positions = ['Goalkeeper', 'Defender', 'Midfielder', 'Forward'];
-    
-    // generate all possible combination of lineups using both home and away players
-    // each lineup must have: a list of players with all the properties, the number of home players, the number of away players, the total cap
-    // the total cap of a lineup is the sum of the cap of all the players
-    // the total cap of a lineup must be less than or equal to the cap of the game
-    // one player per position
-    // add an extra player that cannot be a goalkeeper and cannot be a duplicate
-    // the extra player must be a player that is not already in the lineup
+    const allGK = allPlayers.filter((player: any) => player.position === 'Goalkeeper');
+    const allDF = allPlayers.filter((player: any) => player.position === 'Defender');
+    const allMF = allPlayers.filter((player: any) => player.position === 'Midfielder');
+    const allFW = allPlayers.filter((player: any) => player.position === 'Forward');
 
     return (
         <main>
@@ -43,10 +39,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
-            <div className='text-center m-4'>{JSON.stringify(homeIds, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(homePlayers, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(awayIds, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(awayPlayers, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(allGK, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(allDF, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(allMF, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(allFW, null, 2)}</div>
         </main>
     );
 }
