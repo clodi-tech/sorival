@@ -14,9 +14,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const awayTeam = game.game.awayTeam;
     homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_TEAM_URL;
     awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
-    const homeLineup = game.game.homeFormation.startingLineup.flat();
-    const awayLineup = game.game.awayFormation.startingLineup.flat();
-    const startingIds = homeLineup.concat(awayLineup).map((player: any) => player.id);
+    const homeIds = game.game.homeFormation.startingLineup.flat().map((player: any) => player.id);
+    const awayIds = game.game.awayFormation.startingLineup.flat().map((player: any) => player.id);
     const draftablePlayers = game.draftablePlayers;
 
     return (
@@ -33,7 +32,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
-            <div className='text-center m-4'>{JSON.stringify(startingIds, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(homeIds, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(awayIds, null, 2)}</div>
             <div className='text-center m-4'>{JSON.stringify(draftablePlayers, null, 2)}</div>
         </main>
     );
