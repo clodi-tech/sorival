@@ -27,14 +27,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
     
     // generate all possible lineups with one player per position
     const lineups: any[] = [];
+    const lineupKeys = new Set();
+
     for (const gk of allGK) {
         for (const df of allDF) {
             for (const mf of allMF) {
                 for (const fw of allFW) {
                     // generate the extra players
                     // cannot be goalkeeper, cannot be the same as the other players
-                    let extra = allPlayers.filter((player: any) => player.position != 'Goalkeeper');
-                    extra = extra.filter((player: any) => ![df, mf, fw].includes(player));
+                    const extra = allPlayers.filter((player: any) => player.position != 'Goalkeeper' && ![df, mf, fw].includes(player));
 
                     for (const ex of extra) {
                         // sum the cap of the lineup
@@ -46,19 +47,20 @@ export default async function Page({ params }: { params: { slug: string } }) {
                             const key = [gk, df, mf, fw, ex].map((player: any) => player.player.id).sort().join('');
 
                             // if the lineup is not already in the list
-                            if (lineups.find(lineup => lineup.key === key)) {
+                            if (lineupKeys.has(key)) {
                                 continue;
                             }
+    
+                            lineupKeys.add(key);
 
-                            // count the number of players from the home team
-                            const homeCount = [gk, df, mf, fw, ex].filter((player: any) => homeIds.includes(player.player.id)).length;
-
-                            // count the number of players from the away team
-                            const awayCount = [gk, df, mf, fw, ex].filter((player: any) => awayIds.includes(player.player.id)).length;
+                            // count the number of home and away players
+                            const players = [gk, df, mf, fw, ex];
+                            const homeCount = players.filter((player: any) => homeIds.includes(player.player.id)).length;
+                            const awayCount = players.filter((player: any) => awayIds.includes(player.player.id)).length;
 
                             lineups.push({
                                 'key': key,
-                                'players': [gk, df, mf, fw, ex],
+                                'players': players,
                                 'totalCap': cap,
                                 'homeCount': homeCount,
                                 'awayCount': awayCount
