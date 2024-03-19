@@ -24,7 +24,7 @@ export async function nextGames() {
     } 
     catch (error) {
         console.log(error);
-        throw new Error('failed to fetch the data');
+        throw new Error('failed to get the upcoming games');
     }
 }
 
@@ -47,6 +47,6 @@ export async function startingLineup(slug: string) {
     } 
     catch (error) {
         console.log(error);
-        throw new Error('failed to fetch the data');
+        throw new Error('failed to fetch the starting lineup');
     }
 }
