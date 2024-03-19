@@ -16,9 +16,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
     awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
     const homeIds = game.game.homeFormation.startingLineup.flat().map((player: any) => player.id);
     const awayIds = game.game.awayFormation.startingLineup.flat().map((player: any) => player.id);
-    const draftablePlayers = game.draftablePlayers;
-    const homePlayers = draftablePlayers.filter((player: any) => homeIds.includes(player.player.id));
-    const awayPlayers = draftablePlayers.filter((player: any) => awayIds.includes(player.player.id));
+    const homePlayers = game.draftablePlayers.filter((player: any) => homeIds.includes(player.player.id));
+    const awayPlayers = game.draftablePlayers.filter((player: any) => awayIds.includes(player.player.id));
+
+    const positions = ['Goalkeeper', 'Defender', 'Midfielder', 'Forward'];
+    
+    // generate all possible combination of lineups using both home and away players
+    // each lineup must have: a list of players with all the properties, the number of home players, the number of away players, the total cap
+    // the total cap of a lineup is the sum of the cap of all the players
+    // the total cap of a lineup must be less than or equal to the cap of the game
+    // one player per position
+    // add an extra player that cannot be a goalkeeper and cannot be a duplicate
+    // the extra player must be a player that is not already in the lineup
 
     return (
         <main>
