@@ -4,6 +4,7 @@ import Lineups from '@/app/lib/lineups';
 
 const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
+const TOP = 3;
 
 export default async function Page({ params }: { params: { slug: string } }) {
     const data: any = await startingLineup(params.slug);
@@ -72,10 +73,37 @@ export default async function Page({ params }: { params: { slug: string } }) {
         }
     }
 
-    const topLineups = lineups
+    const top50 = lineups
     .filter(lineup => lineup.homeCount === 5)
     .sort((a, b) => b.totalCap - a.totalCap)
-    .slice(0, 5);
+    .slice(0, TOP);
+
+    const top41 = lineups
+    .filter(lineup => lineup.homeCount === 4)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, TOP);
+
+    const top32 = lineups
+    .filter(lineup => lineup.homeCount === 3)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, TOP);
+
+    const top23 = lineups
+    .filter(lineup => lineup.homeCount === 2)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, TOP);
+
+    const top14 = lineups
+    .filter(lineup => lineup.homeCount === 1)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, TOP);
+
+    const top05 = lineups
+    .filter(lineup => lineup.homeCount === 0)
+    .sort((a, b) => b.totalCap - a.totalCap)
+    .slice(0, TOP);
+
+    const topLineups = top50.concat(top41, top32, top23, top14, top05);
 
     return (
         <main>

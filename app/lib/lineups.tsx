@@ -7,14 +7,18 @@ const max = 5;
 
 export default function Lineups({ topLineups }: { topLineups: any[] }) {
   const [sliderValue, setSliderValue] = useState(max);
-  return (
+  
+  const filtered = topLineups
+    .filter(lineup => lineup.homeCount === sliderValue)
+  
+    return (
     <>
       <div className='flex justify-center items-center m-4'>
           <span className='mr-2'>{sliderValue}</span>
-          <input type='range' min='0' max='5' value={sliderValue} onChange={(e) => setSliderValue(Number(e.target.value))} />
+          <input type='range' min='0' max={max} value={sliderValue} onChange={(e) => setSliderValue(Number(e.target.value))} />
           <span className='ml-2'>{max - sliderValue}</span>
       </div>
-      {topLineups.map((lineup, index) => (
+      {filtered.map((lineup, index) => (
         <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
             <div className='flex justify-center items-center'>
                 {lineup.players.map((player: any, index: any) => (
