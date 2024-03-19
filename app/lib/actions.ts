@@ -25,17 +25,22 @@ function getTopLineups(lineups: any[], homeCount: any) {
 export async function nextGames() {
     noStore();
 
-    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { awayTeam { 
-        ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } homeTeam { 
-        ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } } } } } }`;
+    const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { 
+        date competition { displayName }
+        homeTeam { ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
+        awayTeam { ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } } } } } }`;
 
     try {
         const data: any = await graphQLClient.request(query);
 
+        // set the date to compare with the game date
+        const tomorrow = new Date();
+        tomorrow.setHours(tomorrow.getHours() + 24);
+
         // prepare the data
         const games = data.football.rivals.upcomingGames;
         const gamesWithFormation = games
-        .filter((game: any) => game.formationKnown)
+        .filter((game: any) => game.formationKnown && new Date(game.game.date) <= tomorrow)
         .map((game: any) => {
             game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_TEAM_URL;
             game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_TEAM_URL;
