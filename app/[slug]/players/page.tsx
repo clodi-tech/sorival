@@ -1,6 +1,6 @@
 import { startingLineup } from '@/app/lib/actions';
 import Image from 'next/image';
-import Slider from '@/app/lib/slider';
+import Lineups from '@/app/lib/lineups';
 
 const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
@@ -90,22 +90,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     <span>{awayTeam.shortName}</span>
                 </div>
             </div>
-            <Slider />
-            {topLineups.map((lineup, index) => (
-                <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
-                    <div className='flex justify-center items-center'>
-                        {lineup.players.map((player: any, index: any) => (
-                            <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
-                                <Image src={player.pictureUrl} alt='player picture' width={50} height={81} />
-                                <span>{player.capValue}</span>
-                            </div>
-                        ))}
-                    </div>
-                    <div className='flex justify-center items-center'>
-                        <span>{lineup.totalCap}</span>
-                    </div>
-                </div>
-            ))}
+            <Lineups topLineups={topLineups} />
         </main>
     );
 }
