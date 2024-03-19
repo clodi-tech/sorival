@@ -1,5 +1,6 @@
 import { startingLineup } from '@/app/lib/actions';
 import Image from 'next/image';
+import Slider from '@/app/lib/slider';
 
 const DEFAULT_PIC_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
@@ -30,37 +31,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     <span>{awayTeam.shortName}</span>
                 </div>
             </div>
-            <div className="grid grid-cols-3 gap-4">
-                <div>
-                    <span>only home</span>
-                    {homeLineup.map((player: any) => (
-                        <div key={player.id} className="border rounded p-4 flex flex-col items-center">
-                            <Image src={player.squaredPictureUrl} alt='player pic' width={SIZE} height={SIZE} className="mb-2" />
-                            <div className="flex justify-between w-full">
-                                <span>{player.lastFifteenSo5Appearances}</span>
-                                <span>{player.displayName}</span>
-                            </div>
-                            <span className="text-sm mt-2">{player.position}</span>
-                        </div>
-                    ))}
-                </div>
-                <div>
-                    <span>mixed</span>
-                </div>
-                <div>
-                    <span>only away</span>
-                    {awayLineup.map((player: any) => (
-                        <div key={player.id} className="border rounded p-4 flex flex-col items-center">
-                            <Image src={player.squaredPictureUrl} alt='player pic' width={SIZE} height={SIZE} className="mb-2" />
-                            <div className="flex justify-between w-full">
-                                <span>{player.lastFifteenSo5Appearances}</span>
-                                <span>{player.displayName}</span>
-                            </div>
-                            <span className="text-sm mt-2">{player.position}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
+            <Slider />
         </main>
     );
 }
