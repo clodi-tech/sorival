@@ -40,7 +40,7 @@ export async function nextGames() {
         // prepare the data
         const games = data.football.rivals.upcomingGames;
         const gamesWithFormation = games
-        .filter((game: any) => game.formationKnown && new Date(game.game.date) <= tomorrow)
+        .filter((game: any) => game.formationKnown && new Date(game.game.date) < tomorrow)
         .map((game: any) => {
             game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_TEAM_URL;
             game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_TEAM_URL;
