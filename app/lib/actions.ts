@@ -60,6 +60,7 @@ export async function startingLineup(slug: string) {
     noStore();
 
     const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { id cap game {
+        competition { displayName }
         homeTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
         awayTeam { ... on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } }
         homeFormation { startingLineup { id } }
@@ -73,7 +74,7 @@ export async function startingLineup(slug: string) {
 
         // prepare the data
         const game = data.football.rivals.game;
-        const { homeTeam, awayTeam, homeFormation, awayFormation } = game.game;
+        const { competition, homeTeam, awayTeam, homeFormation, awayFormation } = game.game;
 
         homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_TEAM_URL;
         awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
@@ -136,7 +137,7 @@ export async function startingLineup(slug: string) {
         }
 
         const topLineups = [5, 4, 3, 2, 1, 0].flatMap(homeCount => getTopLineups(lineups, homeCount));
-        return {homeTeam, awayTeam, topLineups};
+        return {competition, homeTeam, awayTeam, topLineups};
     } 
     catch (error) {
         console.log(error);
