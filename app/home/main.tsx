@@ -2,7 +2,7 @@ import { nextGames } from "../lib/actions";
 import Link from "next/link";
 import Image from "next/image";
 
-const DEFAULT_PIC_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
+const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
 
 export default async function Main() {
@@ -13,8 +13,8 @@ export default async function Main() {
     const gamesWithFormation = games
     .filter((game: any) => game.formationKnown)
     .map((game: any) => {
-        game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_PIC_URL;
-        game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_PIC_URL;
+        game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_TEAM_URL;
+        game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_TEAM_URL;
         return game;
     });
 

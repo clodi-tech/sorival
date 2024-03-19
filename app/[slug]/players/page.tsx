@@ -2,7 +2,7 @@ import { startingLineup } from '@/app/lib/actions';
 import Image from 'next/image';
 import Slider from '@/app/lib/slider';
 
-const DEFAULT_PIC_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
+const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -12,12 +12,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const game = data.football.rivals.game;
     const homeTeam = game.game.homeTeam;
     const awayTeam = game.game.awayTeam;
-    homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_PIC_URL;
-    awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_PIC_URL;
+    homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_TEAM_URL;
+    awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
     const homeLineup = game.game.homeFormation.startingLineup.flat();
     const awayLineup = game.game.awayFormation.startingLineup.flat();
 
-    // render the teams on top and the home players on the left, away players on the right
     return (
         <main>
             <div className="flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1">
