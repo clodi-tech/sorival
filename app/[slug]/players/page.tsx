@@ -10,15 +10,15 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     // prepare the data
     const game = data.football.rivals.game;
-    const homeTeam = game.game.homeTeam;
-    const awayTeam = game.game.awayTeam;
+    const { homeTeam, awayTeam, homeFormation, awayFormation } = game.game;
+
     homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_TEAM_URL;
     awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
-    const homeIds = game.game.homeFormation.startingLineup.flat().map((player: any) => player.id);
-    const awayIds = game.game.awayFormation.startingLineup.flat().map((player: any) => player.id);
-    const homePlayers = game.draftablePlayers.filter((player: any) => homeIds.includes(player.player.id));
-    const awayPlayers = game.draftablePlayers.filter((player: any) => awayIds.includes(player.player.id));
-    const allPlayers = homePlayers.concat(awayPlayers);
+
+    const homeIds = homeFormation.startingLineup.flat().map((player: any) => player.id);
+    const awayIds = awayFormation.startingLineup.flat().map((player: any) => player.id);
+
+    const allPlayers = game.draftablePlayers.filter((player: any) => homeIds.includes(player.player.id) || awayIds.includes(player.player.id));
 
     const allGK = allPlayers.filter((player: any) => player.position === 'Goalkeeper');
     const allDF = allPlayers.filter((player: any) => player.position === 'Defender');
