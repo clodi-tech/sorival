@@ -24,6 +24,41 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const allDF = allPlayers.filter((player: any) => player.position === 'Defender');
     const allMF = allPlayers.filter((player: any) => player.position === 'Midfielder');
     const allFW = allPlayers.filter((player: any) => player.position === 'Forward');
+    
+    // generate all possible lineups with one player for position
+    const lineups = [];
+    for (const gk of allGK) {
+        for (const df of allDF) {
+            for (const mf of allMF) {
+                for (const fw of allFW) {
+                    // generate the extra players
+                    // cannot be goalkeeper, cannot be the same as the other players
+                    let extra = allPlayers.filter((player: any) => player.position != 'Goalkeeper');
+                    extra = allPlayers.filter((player: any) => ![df, mf, fw].includes(player));
+
+                    for (const ex of extra) {
+                        // sum the cap of the lineup
+                        const cap = gk.capValue + df.capValue + mf.capValue + fw.capValue + ex.capValue;
+
+                        // add the lineup to the list if the cap is less than the game cap
+                        if (cap <= game.cap) {
+                            // count the number of players from the home team
+                            const homeCount = [gk, df, mf, fw, ex].filter((player: any) => homeIds.includes(player.player.id)).length;
+
+                            // count the number of players from the away team
+                            const awayCount = [gk, df, mf, fw, ex].filter((player: any) => awayIds.includes(player.player.id)).length;
+                            lineups.push({
+                                'lineup': [gk, df, mf, fw, ex],
+                                'totalCap': cap,
+                                'homeCount': homeCount,
+                                'awayCount': awayCount
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     return (
         <main>
@@ -39,10 +74,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
-            <div className='text-center m-4'>{JSON.stringify(allGK, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(allDF, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(allMF, null, 2)}</div>
-            <div className='text-center m-4'>{JSON.stringify(allFW, null, 2)}</div>
+            <div className='text-center m-4'>{JSON.stringify(lineups, null, 2)}</div>
         </main>
     );
 }
