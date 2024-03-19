@@ -24,7 +24,10 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
                 {lineup.players.map((player: any, index: any) => (
                     <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
                         <Image src={player.pictureUrl} alt='player picture' width={50} height={81} />
-                        <span>{player.capValue}</span>
+                        <div className="flex items-center justify-center gap-1">
+                          <span>{player.capValue}</span>
+                          <Image src={`/${player.position}.svg`} alt='position' width={15} height={15} />
+                        </div>
                     </div>
                 ))}
             </div>

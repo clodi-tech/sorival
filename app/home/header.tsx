@@ -6,8 +6,7 @@ export default function Header() {
         <header>
             <Link href='/'>
                 <Image src='/logo.svg' alt='logo'
-                    width={50}
-                    height={50}
+                    width={50} height={50}
                     priority={true}/>
             </Link>
         </header>
