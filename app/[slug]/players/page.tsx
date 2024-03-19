@@ -31,14 +31,14 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     return (
         <main>
-            <div className="flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1">
-                <div className="flex flex-col items-center">
-                    <Image src={homeTeam.pictureUrl} alt="home logo" width={SIZE} height={SIZE} />
+            <div className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
+                <div className='flex flex-col items-center'>
+                    <Image src={homeTeam.pictureUrl} alt='home logo' width={SIZE} height={SIZE} />
                     <span>{homeTeam.shortName}</span>
                 </div>
-                <span className="mx-2">{game.cap}</span>
-                <div className="flex flex-col items-center">
-                    <Image src={awayTeam.pictureUrl} alt="away logo" width={SIZE} height={SIZE} />
+                <span className='mx-2'>{game.cap}</span>
+                <div className='flex flex-col items-center'>
+                    <Image src={awayTeam.pictureUrl} alt='away logo' width={SIZE} height={SIZE} />
                     <span>{awayTeam.shortName}</span>
                 </div>
             </div>

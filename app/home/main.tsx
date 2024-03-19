@@ -1,6 +1,6 @@
-import { nextGames } from "../lib/actions";
-import Link from "next/link";
-import Image from "next/image";
+import { nextGames } from '../lib/actions';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
@@ -19,14 +19,14 @@ export default async function Main() {
     });
 
     const GameLink = ({ game }: { game: any }) => (
-        <Link href={`/${game.slug}/players`} key={game.id} className="flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1">
-            <div className="flex flex-col items-center">
-                <Image src={game.game.homeTeam.pictureUrl} alt="home logo" width={SIZE} height={SIZE} />
+        <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
+            <div className='flex flex-col items-center'>
+                <Image src={game.game.homeTeam.pictureUrl} alt='home logo' width={SIZE} height={SIZE} />
                 <span>{game.game.homeTeam.shortName}</span>
             </div>
-            <span className="mx-2">VS</span>
-            <div className="flex flex-col items-center">
-                <Image src={game.game.awayTeam.pictureUrl} alt="away logo" width={SIZE} height={SIZE} />
+            <span className='mx-2'>VS</span>
+            <div className='flex flex-col items-center'>
+                <Image src={game.game.awayTeam.pictureUrl} alt='away logo' width={SIZE} height={SIZE} />
                 <span>{game.game.awayTeam.shortName}</span>
             </div>
         </Link>
