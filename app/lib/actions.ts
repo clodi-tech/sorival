@@ -1,6 +1,8 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { unstable_noStore as noStore } from 'next/cache';
 
+const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
+
 // read the api url
 const apiUrl = process.env.SORARE_API_URL;
 if (!apiUrl) {
@@ -19,8 +21,19 @@ export async function nextGames() {
         ...on Club { shortName pictureUrl } ... on NationalTeam { shortName pictureUrl } } } } } } }`;
 
     try {
-        const data = await graphQLClient.request(query);
-        return data;
+        const data: any = await graphQLClient.request(query);
+
+        // prepare the data
+        const games = data.football.rivals.upcomingGames;
+        const gamesWithFormation = games
+        .filter((game: any) => game.formationKnown)
+        .map((game: any) => {
+            game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_TEAM_URL;
+            game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_TEAM_URL;
+            return game;
+        });
+
+        return gamesWithFormation;
     } 
     catch (error) {
         console.log(error);

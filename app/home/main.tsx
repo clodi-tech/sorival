@@ -2,21 +2,10 @@ import { nextGames } from '../lib/actions';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
 const SIZE = 25;
 
 export default async function Main() {
-    const data: any = await nextGames();
-
-    // prepare the data
-    const games = data.football.rivals.upcomingGames;
-    const gamesWithFormation = games
-    .filter((game: any) => game.formationKnown)
-    .map((game: any) => {
-        game.game.homeTeam.pictureUrl = game.game.homeTeam.pictureUrl || DEFAULT_TEAM_URL;
-        game.game.awayTeam.pictureUrl = game.game.awayTeam.pictureUrl || DEFAULT_TEAM_URL;
-        return game;
-    });
+    const gamesWithFormation: any = await nextGames();
 
     const GameLink = ({ game }: { game: any }) => (
         <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
