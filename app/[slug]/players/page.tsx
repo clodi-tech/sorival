@@ -72,7 +72,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                     <Image src={homeTeam.pictureUrl} alt='home logo' width={SIZE} height={SIZE} />
                     <span>{homeTeam.shortName}</span>
                 </div>
-                <span className='mx-2'>{game.cap}</span>
+                <span className='mx-2'>VS</span>
                 <div className='flex flex-col items-center'>
                     <Image src={awayTeam.pictureUrl} alt='away logo' width={SIZE} height={SIZE} />
                     <span>{awayTeam.shortName}</span>
