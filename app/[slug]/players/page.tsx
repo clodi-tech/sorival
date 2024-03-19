@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const allFW = allPlayers.filter((player: any) => player.position === 'Forward');
     
     // generate all possible lineups with one player per position
-    const lineups = [];
+    const lineups: any[] = [];
     for (const gk of allGK) {
         for (const df of allDF) {
             for (const mf of allMF) {
@@ -42,12 +42,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
                         // add the lineup to the list if the cap is less than the game cap
                         if (cap <= game.cap) {
+                            // sort and concatenate the players id to build a unique key
+                            const key = [gk, df, mf, fw, ex].map((player: any) => player.player.id).sort().join('');
+
+                            // if the lineup is not already in the list
+                            if (lineups.find(lineup => lineup.key === key)) {
+                                continue;
+                            }
+
                             // count the number of players from the home team
                             const homeCount = [gk, df, mf, fw, ex].filter((player: any) => homeIds.includes(player.player.id)).length;
 
                             // count the number of players from the away team
                             const awayCount = [gk, df, mf, fw, ex].filter((player: any) => awayIds.includes(player.player.id)).length;
+
                             lineups.push({
+                                'key': key,
                                 'players': [gk, df, mf, fw, ex],
                                 'totalCap': cap,
                                 'homeCount': homeCount,
@@ -60,7 +70,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         }
     }
 
-    const topHomeLineups = lineups
+    const topLineups = lineups
     .filter(lineup => lineup.homeCount === 5)
     .sort((a, b) => b.totalCap - a.totalCap)
     .slice(0, 5);
@@ -79,10 +89,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
                 </div>
             </div>
             <Slider />
-            {topHomeLineups.map((lineup, index) => (
+            {topLineups.map((lineup, index) => (
                 <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
                     <div className='flex justify-center items-center'>
-                        {lineup.players.map((player, index) => (
+                        {lineup.players.map((player: any, index: any) => (
                             <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
                                 <Image src={player.pictureUrl} alt='player picture' width={50} height={81} />
                                 <span>{player.capValue}</span>
