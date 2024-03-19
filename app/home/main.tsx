@@ -5,7 +5,7 @@ import Image from 'next/image';
 const SIZE = 25;
 
 export default async function Main() {
-    const gamesWithFormation: any = await nextGames();
+    const gamesWithFormation = await nextGames();
 
     const GameLink = ({ game }: { game: any }) => (
         <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
