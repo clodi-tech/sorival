@@ -6,8 +6,10 @@ const TOP = 30;
 
 // read the api url
 const apiUrl = process.env.SORARE_API_URL;
-if (!apiUrl) {
-    throw new Error('SORARE_API_URL is not defined');
+const bot = process.env.TELEGRAM_BOT_TOKEN;
+const chat = process.env.TELEGRAM_CHAT_ID;
+if (!apiUrl || !bot || !chat) {
+    throw new Error('secrets not defined');
 }
 
 // create the client
@@ -148,5 +150,20 @@ export async function startingLineup(slug: string) {
     catch (error) {
         console.log(error);
         throw new Error('failed to fetch the starting lineup');
+    }
+}
+
+// send telegram message
+export async function sendTelegramMessage(message: string) {
+
+    const url = `https://api.telegram.org/bot${bot}/sendMessage?chat_id=${chat}&text=${message}`;
+
+    try {
+        const response = await fetch(url);
+        console.log(response);
+    } 
+    catch (error) {
+        console.log(error);
+        throw new Error('failed to send the telegram message');
     }
 }
