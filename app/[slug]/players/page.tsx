@@ -1,26 +1,35 @@
 import { startingLineup } from '@/app/lib/actions';
-import Image from 'next/image';
 import Lineups from '@/app/lib/lineups';
+import {Card, CardHeader, CardFooter, Image, Divider} from "@nextui-org/react";
 
-const SIZE = 25;
+const SIZE = 30;
 
 export default async function Page({ params }: { params: { slug: string } }) {
     const {competition, homeTeam, awayTeam, topLineups } = await startingLineup(params.slug);
 
     return (
         <main>
-            <span>{competition.displayName}</span>
-            <div className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
-                <div className='flex flex-col items-center'>
-                    <Image src={homeTeam.pictureUrl} alt='home logo' width={SIZE} height={SIZE} />
-                    <span>{homeTeam.shortName}</span>
-                </div>
-                <span className='mx-2'>VS</span>
-                <div className='flex flex-col items-center'>
-                    <Image src={awayTeam.pictureUrl} alt='away logo' width={SIZE} height={SIZE} />
-                    <span>{awayTeam.shortName}</span>
-                </div>
-            </div>
+            <Card className="p-1 m-2">
+                <CardHeader className="flex gap-3">
+                    <div>{homeTeam.shortName}</div>
+                    <Image alt="home logo"
+                        width={SIZE} height={SIZE}
+                        src={homeTeam.pictureUrl}
+                        radius="sm"
+                    />
+                    <div>VS</div>
+                    <Image alt="away logo"
+                        width={SIZE} height={SIZE}
+                        src={awayTeam.pictureUrl}
+                        radius="sm"
+                    />
+                    <div>{awayTeam.shortName}</div>
+                </CardHeader>
+                <Divider/>
+                <CardFooter className="flex justify-center items-center p-0">
+                    {competition.displayName}
+                </CardFooter>
+            </Card>
             <Lineups topLineups={topLineups} />
         </main>
     );
