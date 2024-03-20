@@ -2,7 +2,7 @@ import { GraphQLClient, gql } from 'graphql-request';
 import { unstable_noStore as noStore } from 'next/cache';
 
 const DEFAULT_TEAM_URL = 'https://sorare.com/assets/shield_none-uVtR8SvS.png';
-const TOP = 10;
+const TOP = 30;
 
 // read the api url
 const apiUrl = process.env.SORARE_API_URL;
