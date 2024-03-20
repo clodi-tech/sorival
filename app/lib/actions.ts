@@ -24,7 +24,6 @@ function getTopLineups(lineups: any[], homeCount: any) {
 // get upcoming games
 export async function nextGames() {
     noStore();
-    console.log('nextGames');
 
     const query = gql`{ football { rivals { upcomingGames (onlyInvited: false) { id cap formationKnown slug game { 
         date competition { displayName }
@@ -59,7 +58,6 @@ export async function nextGames() {
 // get starting lineup
 export async function startingLineup(slug: string) {
     noStore();
-    console.log('startingLineup');
 
     const query = gql`query ($slug: String!) { football { rivals { game(slug: $slug) { id cap game {
         competition { displayName }
