@@ -125,6 +125,11 @@ export async function startingLineup(slug: string) {
                                 const homeCount = players.filter((player: any) => homeIds.includes(player.player.id)).length;
                                 const awayCount = players.filter((player: any) => awayIds.includes(player.player.id)).length;
 
+                                // add the home attribute to each player
+                                for (const player of players) {
+                                    player.home = homeIds.includes(player.player.id);
+                                }
+
                                 lineups.push({
                                     'key': key,
                                     'players': players,

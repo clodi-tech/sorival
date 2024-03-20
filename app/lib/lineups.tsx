@@ -45,7 +45,9 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
                       />
                     </CardBody>
                     <CardFooter className='flex justify-center items-center gap-1 p-1'>
-                      <Chip size='sm' radius='sm' color='secondary'>H</Chip>
+                      <Chip size='sm' radius='sm' color='secondary' variant='bordered'>
+                        {player.home ? 'H' : 'A'}
+                      </Chip>
                       <Chip size='sm' radius='sm' color='primary'>{player.capValue}</Chip>
                     </CardFooter>
                   </Card>
