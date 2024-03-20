@@ -20,6 +20,7 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
         startContent={`${sliderValue} H`}
         endContent={`${max-sliderValue} A`}
         minValue={0} maxValue={max}
+        showOutline={true}
         onChange={(value) => setSliderValue(Number(value))}
         className="max-w-xs m-2" defaultValue={max}
       />
