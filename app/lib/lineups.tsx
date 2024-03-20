@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import { Slider, Tabs, Tab } from '@nextui-org/react';
+import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divider } from '@nextui-org/react';
 
 const max = 5;
 
@@ -16,13 +15,13 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
   
     return (
     <>
-      <Slider aria-label="Volume" size="lg" color="primary"
+      <Slider aria-label='Volume' size='lg' color='primary'
         startContent={`${sliderValue} H`}
         endContent={`${max-sliderValue} A`}
         minValue={0} maxValue={max}
         showOutline={true}
         onChange={(value) => setSliderValue(Number(value))}
-        className="max-w-xs m-2" defaultValue={max}
+        className='max-w-xs m-2' defaultValue={max}
       />
       <div className='flex flex-wrap gap-4 m-2'>
         <Tabs key='bordered' variant='bordered' aria-label='filter results'
@@ -34,22 +33,30 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
         </Tabs>
       </div>
       {filtered.map((lineup, index) => (
-        <div key={index} className='border border-gray-600 rounded-2xl p-3 m-1'>
-            <div className='flex justify-center items-center'>
+        <Card key={index} className='p-1 m-2'>
+            <CardHeader className='flex justify-center items-center gap-2 p-2'>
                 {lineup.players.map((player: any, index: any) => (
-                    <div key={index} className='flex flex-col justify-center items-center mr-1 ml-1'>
-                        <Image src={player.pictureUrl} alt='player picture' width={50} height={81} />
-                        <div className='flex items-center justify-center gap-1'>
-                          <span>{player.capValue}</span>
-                          <Image src={`/${player.position}.svg`} alt='position' width={15} height={15} />
-                        </div>
-                    </div>
+                  <Card key={index} radius='sm' isPressable onPress={() => console.log('item pressed')}>
+                    <CardBody className='overflow-visible p-0'>
+                      <Image alt='player picture'
+                        className='object-cover' radius='sm'
+                        width={50} height={81}
+                        src={player.pictureUrl}
+                      />
+                    </CardBody>
+                    <CardFooter className='flex justify-center items-center gap-1 p-0'>
+                      <span>H</span>
+                      <span>{player.capValue}</span>
+                      <Image src={`/${player.position}.svg`} alt='position' width={10} height={10} />
+                    </CardFooter>
+                  </Card>
                 ))}
-            </div>
-            <div className='flex justify-center items-center'>
-                <span>{lineup.totalCap}</span>
-            </div>
-        </div>
+            </CardHeader>
+            <Divider/>
+            <CardFooter className='flex justify-center items-center p-0'>
+              {lineup.totalCap}
+            </CardFooter>
+        </Card>
       ))}
     </>
   );
