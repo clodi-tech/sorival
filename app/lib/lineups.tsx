@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import {Tabs, Tab} from '@nextui-org/react';
+import { Slider, Tabs, Tab } from '@nextui-org/react';
 
 const max = 5;
 
@@ -16,12 +16,13 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
   
     return (
     <>
-      <div className='flex justify-center items-center m-4'>
-          <span className='mr-2'>{sliderValue}</span>
-          <input type='range' min='0' max={max} value={sliderValue} onChange={(e) => setSliderValue(Number(e.target.value))} />
-          <span className='ml-2'>{max - sliderValue}</span>
-      </div>
-      <div className='flex flex-wrap gap-4 mb-4'>
+      <Slider aria-label="Volume" size="lg" color="primary"
+        label={`${sliderValue} H`} 
+        getValue={(value) => `${max-Number(value)} A`} minValue={0} maxValue={max}
+        onChange={(value) => setSliderValue(Number(value))}
+        className="max-w-xs m-2" defaultValue={max}
+      />
+      <div className='flex flex-wrap gap-4 m-2'>
         <Tabs key='bordered' variant='bordered' aria-label='filter results'
         selectedKey={resultsValue} onSelectionChange={(key) => setResultsValue(String(key))}>
           <Tab key='3' title='3'/>
