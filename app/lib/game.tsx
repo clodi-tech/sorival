@@ -1,4 +1,4 @@
-import {Card, CardHeader, CardFooter, Image, Divider} from "@nextui-org/react";
+import { Chip, Card, CardHeader, CardFooter, Image, Divider } from "@nextui-org/react";
 
 const SIZE = 30;
 
@@ -21,8 +21,10 @@ export default function Game({ homeTeam, awayTeam, competition }: any) {
                 <div>{awayTeam.shortName}</div>
             </CardHeader>
             <Divider/>
-            <CardFooter className="flex justify-center items-center p-0">
-                {competition.displayName}
+            <CardFooter className="flex justify-center items-center p-0 gap-5">
+                <Chip size='sm' radius='sm' color='secondary' variant='bordered'>H</Chip>
+                <div>{competition.displayName}</div>
+                <Chip size='sm' radius='sm' color='secondary' variant='bordered'>A</Chip>
             </CardFooter>
         </Card>
     );
