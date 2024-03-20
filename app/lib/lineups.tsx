@@ -17,8 +17,9 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
     return (
     <>
       <Slider aria-label="Volume" size="lg" color="primary"
-        label={`${sliderValue} H`} 
-        getValue={(value) => `${max-Number(value)} A`} minValue={0} maxValue={max}
+        startContent={`${sliderValue} H`}
+        endContent={`${max-sliderValue} A`}
+        minValue={0} maxValue={max}
         onChange={(value) => setSliderValue(Number(value))}
         className="max-w-xs m-2" defaultValue={max}
       />
