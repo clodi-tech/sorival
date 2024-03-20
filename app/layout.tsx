@@ -3,6 +3,7 @@ import { Rajdhani } from "next/font/google";
 import "./globals.css";
 import Header from "./home/header";
 import Footer from "./home/footer";
+import { Providers } from "./providers";
 
 const font = Rajdhani({ 
     subsets: ["latin"],
@@ -20,11 +21,15 @@ export default function RootLayout({
     children: React.ReactNode; 
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" className="dark">
             <body className={font.className}>
-                <Header />
-                {children}
-                <Footer />
+                <Providers>
+                    <div className="root">
+                        <Header />
+                        {children}
+                        <Footer />
+                    </div>
+                </Providers>
             </body>
         </html>
     );

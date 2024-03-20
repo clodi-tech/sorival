@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-body {
+.root {
   color: #BBBBBB;
   background: #000000;
   display: grid;
