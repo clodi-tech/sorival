@@ -14,9 +14,9 @@ export default function Header() {
                 <PopoverTrigger>
                     <Button color="primary" variant='faded' size='sm'>feedback</Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-[240px] gap-3 p-3">
-                    <Textarea label="give me your valuable feedback!" labelPlacement='outside'
-                        variant="bordered" placeholder="tell me what you like or don't like about the app. I will make it better."
+                <PopoverContent className="w-[240px] gap-3 p-3 border border-gray-700">
+                    <Textarea label="thank you for your valuable feedback!" labelPlacement='outside'
+                        variant="bordered" placeholder="tell me what you like or don't like about the app. I will make it better. thank you."
                         disableAnimation autoFocus disableAutosize radius='sm'
                         classNames={{
                         base: "max-w-xs",
