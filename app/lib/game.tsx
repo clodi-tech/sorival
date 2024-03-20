@@ -2,7 +2,7 @@ import { Chip, Card, CardHeader, CardFooter, Image, Divider } from "@nextui-org/
 
 const SIZE = 30;
 
-export default function Game({ homeTeam, awayTeam, competition }: any) {
+export default function Game({ homeTeam, awayTeam, competition, isLineups }: any) {
     return (
         <Card className="p-1 m-2">
             <CardHeader className="flex gap-3">
@@ -22,9 +22,9 @@ export default function Game({ homeTeam, awayTeam, competition }: any) {
             </CardHeader>
             <Divider/>
             <CardFooter className="flex justify-center items-center p-0 gap-5">
-                <Chip size='sm' radius='sm' color='secondary' variant='bordered'>H</Chip>
+                {isLineups && <Chip size='sm' radius='sm' color='secondary' variant='bordered'>H</Chip>}
                 <div>{competition.displayName}</div>
-                <Chip size='sm' radius='sm' color='secondary' variant='bordered'>A</Chip>
+                {isLineups && <Chip size='sm' radius='sm' color='secondary' variant='bordered'>A</Chip>}
             </CardFooter>
         </Card>
     );

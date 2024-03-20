@@ -7,7 +7,7 @@ export default async function Main() {
 
     const GameLink = ({ game }: { game: any }) => (
         <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center border border-gray-600 rounded-2xl p-3 m-1'>
-            <Game competition={game.game.competition} homeTeam={game.game.homeTeam} awayTeam={game.game.awayTeam} />
+            <Game competition={game.game.competition} homeTeam={game.game.homeTeam} awayTeam={game.game.awayTeam} isLineups={false} />
         </Link>
     );
 

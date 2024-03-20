@@ -7,7 +7,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
     return (
         <main>
-            <Game competition={competition} homeTeam={homeTeam} awayTeam={awayTeam} />
+            <Game competition={competition} homeTeam={homeTeam} awayTeam={awayTeam} isLineups={true} />
             <Lineups topLineups={topLineups} gameCap={gameCap} />
         </main>
     );
