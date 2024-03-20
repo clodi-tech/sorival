@@ -23,7 +23,7 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
       </div>
       <div className='flex flex-wrap gap-4 mb-4'>
         <Tabs key='bordered' variant='bordered' aria-label='filter results'
-        selectedKey={resultsValue} onSelectionChange={setResultsValue}>
+        selectedKey={resultsValue} onSelectionChange={(key) => setResultsValue(String(key))}>
           <Tab key='3' title='3'/>
           <Tab key='10' title='10'/>
           <Tab key='30' title='30'/>
