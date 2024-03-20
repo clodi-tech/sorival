@@ -77,6 +77,7 @@ export async function startingLineup(slug: string) {
         // prepare the data
         const game = data.football.rivals.game;
         const { competition, homeTeam, awayTeam, homeFormation, awayFormation } = game.game;
+        const gameCap = game.cap;
 
         homeTeam.pictureUrl = homeTeam.pictureUrl || DEFAULT_TEAM_URL;
         awayTeam.pictureUrl = awayTeam.pictureUrl || DEFAULT_TEAM_URL;
@@ -139,7 +140,7 @@ export async function startingLineup(slug: string) {
         }
 
         const topLineups = [5, 4, 3, 2, 1, 0].flatMap(homeCount => getTopLineups(lineups, homeCount));
-        return {competition, homeTeam, awayTeam, topLineups};
+        return {gameCap, competition, homeTeam, awayTeam, topLineups};
     } 
     catch (error) {
         console.log(error);

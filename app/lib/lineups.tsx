@@ -5,7 +5,7 @@ import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divid
 
 const max = 5;
 
-export default function Lineups({ topLineups }: { topLineups: any[] }) {
+export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLineups: any[] }) {
   const [sliderValue, setSliderValue] = useState(max);
   const [resultsValue, setResultsValue] = useState('3');
   
@@ -53,7 +53,10 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
             </CardHeader>
             <Divider/>
             <CardFooter className='flex justify-center items-center p-1'>
-              <Chip size='sm' radius='sm' color='success'>{lineup.totalCap}</Chip>
+              <Chip size='sm' radius='sm' variant='flat'
+                color={lineup.totalCap === gameCap ? 'success' : 'warning'}>
+                {lineup.totalCap}
+              </Chip>
             </CardFooter>
         </Card>
       ))}
