@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divider } from '@nextui-org/react';
+import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divider, Chip } from '@nextui-org/react';
 
 const max = 5;
 
@@ -36,25 +36,24 @@ export default function Lineups({ topLineups }: { topLineups: any[] }) {
         <Card key={index} className='p-1 m-2'>
             <CardHeader className='flex justify-center items-center gap-2 p-2'>
                 {lineup.players.map((player: any, index: any) => (
-                  <Card key={index} radius='sm' isPressable onPress={() => console.log('item pressed')}>
+                  <Card key={index} radius='none' shadow='none' isPressable onPress={() => console.log('item pressed')}>
                     <CardBody className='overflow-visible p-0'>
                       <Image alt='player picture'
-                        className='object-cover' radius='sm'
-                        width={50} height={81}
+                        className='object-cover' radius='none'
+                        width={60} height={90}
                         src={player.pictureUrl}
                       />
                     </CardBody>
-                    <CardFooter className='flex justify-center items-center gap-1 p-0'>
-                      <span>H</span>
-                      <span>{player.capValue}</span>
-                      <Image src={`/${player.position}.svg`} alt='position' width={10} height={10} />
+                    <CardFooter className='flex justify-center items-center gap-1 p-1'>
+                      <Chip size='sm' radius='sm' color='secondary'>H</Chip>
+                      <Chip size='sm' radius='sm' color='primary'>{player.capValue}</Chip>
                     </CardFooter>
                   </Card>
                 ))}
             </CardHeader>
             <Divider/>
-            <CardFooter className='flex justify-center items-center p-0'>
-              {lineup.totalCap}
+            <CardFooter className='flex justify-center items-center p-1'>
+              <Chip size='sm' radius='sm' color='success'>{lineup.totalCap}</Chip>
             </CardFooter>
         </Card>
       ))}
