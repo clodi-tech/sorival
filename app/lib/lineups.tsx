@@ -22,7 +22,7 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
   
   const filtered = topLineups
     .filter(lineup => lineup.homeCount === sliderValue)
-    .filter(lineup => fixedPlayers.length > 0 ? lineup.players.some((player: any) => fixedPlayers.includes(player.player.id)) : true)
+    .filter(lineup => fixedPlayers.length > 0 ? fixedPlayers.every((playerId: any) => lineup.players.some((player: any) => player.player.id === playerId)) : true)
     .slice(0, Number(resultsValue));
   
     return (
