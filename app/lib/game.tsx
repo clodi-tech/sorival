@@ -2,7 +2,13 @@ import { Chip, Card, CardHeader, CardFooter, Image, Divider } from "@nextui-org/
 
 const SIZE = 30;
 
-export default function Game({ homeTeam, awayTeam, competition, isLineups }: any) {
+export default function Game({ start, homeTeam, awayTeam, competition, isLineups }: any) {
+    // calculate the remaining time in minutes
+    const now = new Date();
+    const gameDate = new Date(start);
+    const remainingTime = gameDate.getTime() - now.getTime();
+    const remainingMinutes = Math.floor(remainingTime / 60000);
+
     return (
         <Card className="p-1 m-2">
             <CardHeader className="grid grid-cols-3 items-center gap-3">
@@ -13,7 +19,7 @@ export default function Game({ homeTeam, awayTeam, competition, isLineups }: any
                         src={homeTeam.pictureUrl}
                         radius="none"
                     />
-                    <div>VS</div>
+                    <Chip size='sm' radius='sm' color='warning' variant='flat'>{String(remainingMinutes)}m</Chip>
                     <Image alt="away logo"
                         width={SIZE} height={SIZE}
                         src={awayTeam.pictureUrl}
