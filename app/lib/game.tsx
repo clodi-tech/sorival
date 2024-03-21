@@ -19,7 +19,7 @@ export default function Game({ start, homeTeam, awayTeam, competition, isLineups
                         src={homeTeam.pictureUrl}
                         radius="none"
                     />
-                    <Chip size='sm' radius='sm' color='warning' variant='flat'>{String(remainingMinutes)}m</Chip>
+                    <Chip size='sm' radius='sm' color={remainingMinutes < 10 ? 'danger' : 'warning'} variant='flat'>{remainingMinutes}m</Chip>
                     <Image alt="away logo"
                         width={SIZE} height={SIZE}
                         src={awayTeam.pictureUrl}
