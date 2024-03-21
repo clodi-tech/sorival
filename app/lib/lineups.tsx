@@ -4,6 +4,21 @@ import { useState } from 'react';
 import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divider, Chip } from '@nextui-org/react';
 
 const max = 5;
+const filterPlayers: any[] = [];
+
+const handlePress = (id: any) => {
+  console.log('pressed', id);
+  // if the player is not in the filterPlayers array, add it
+  if (!filterPlayers.includes(id)) {
+    filterPlayers.push(id);
+    console.log('added', id);
+  } else {
+    // if the player is already in the filterPlayers array, remove it
+    filterPlayers.splice(filterPlayers.indexOf(id), 1);
+    console.log('removed', id);
+  }
+  console.log('filterPlayers', filterPlayers);
+}
 
 export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLineups: any[] }) {
   const [sliderValue, setSliderValue] = useState(max);
@@ -11,6 +26,7 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
   
   const filtered = topLineups
     .filter(lineup => lineup.homeCount === sliderValue)
+    .filter(lineup => filterPlayers.length > 0 ? lineup.players.some((player: any) => filterPlayers.includes(player.player.id)) : true)
     .slice(0, Number(resultsValue));
   
     return (
@@ -35,8 +51,9 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
       {filtered.map((lineup, index) => (
         <Card key={index} className='p-1 m-2'>
             <CardHeader className='flex justify-center items-center gap-2 p-2'>
+
                 {lineup.players.map((player: any, index: any) => (
-                  <Card key={index} radius='none' shadow='none' isPressable onPress={() => console.log('item pressed')}>
+                  <Card key={index} radius='none' shadow='none' isPressable onPress={() => handlePress(player.player.id)}>
                     <CardBody className='overflow-visible p-0'>
                       <Image alt='player picture'
                         className='object-cover' radius='none'
