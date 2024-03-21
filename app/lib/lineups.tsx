@@ -4,25 +4,25 @@ import { useState } from 'react';
 import { Slider, Tabs, Tab, Card, CardHeader, CardBody, CardFooter, Image, Divider, Chip } from '@nextui-org/react';
 
 const max = 5;
-const filterPlayers: any[] = [];
-
-const handlePress = (id: any) => {
-  console.log('pressed', id);
-  // if the player is not in the filterPlayers array, add it
-  if (!filterPlayers.includes(id)) {
-    filterPlayers.push(id);
-    console.log('added', id);
-  } else {
-    // if the player is already in the filterPlayers array, remove it
-    filterPlayers.splice(filterPlayers.indexOf(id), 1);
-    console.log('removed', id);
-  }
-  console.log('filterPlayers', filterPlayers);
-}
 
 export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLineups: any[] }) {
   const [sliderValue, setSliderValue] = useState(max);
   const [resultsValue, setResultsValue] = useState('3');
+  const [filterPlayers, setFilterPlayers] = useState<any[]>([]);
+
+  const handlePress = (id: any) => {
+    console.log('pressed', id);
+    // if the player is not in the filterPlayers array, add it
+    if (!filterPlayers.includes(id)) {
+      setFilterPlayers(prev => [...prev, id]);
+      console.log('added', id);
+    } else {
+      // if the player is already in the filterPlayers array, remove it
+      setFilterPlayers(prev => prev.filter(playerId => playerId !== id));
+      console.log('removed', id);
+    }
+    console.log('filterPlayers', filterPlayers);
+  }
   
   const filtered = topLineups
     .filter(lineup => lineup.homeCount === sliderValue)
