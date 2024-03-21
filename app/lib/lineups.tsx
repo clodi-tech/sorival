@@ -8,25 +8,21 @@ const max = 5;
 export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLineups: any[] }) {
   const [sliderValue, setSliderValue] = useState(max);
   const [resultsValue, setResultsValue] = useState('3');
-  const [filterPlayers, setFilterPlayers] = useState<any[]>([]);
+  const [fixedPlayers, setFixedPlayers] = useState<any[]>([]);
 
   const handlePress = (id: any) => {
-    console.log('pressed', id);
     // if the player is not in the filterPlayers array, add it
-    if (!filterPlayers.includes(id)) {
-      setFilterPlayers(prev => [...prev, id]);
-      console.log('added', id);
+    if (!fixedPlayers.includes(id)) {
+      setFixedPlayers(prev => [...prev, id]);
     } else {
       // if the player is already in the filterPlayers array, remove it
-      setFilterPlayers(prev => prev.filter(playerId => playerId !== id));
-      console.log('removed', id);
+      setFixedPlayers(prev => prev.filter(playerId => playerId !== id));
     }
-    console.log('filterPlayers', filterPlayers);
   }
   
   const filtered = topLineups
     .filter(lineup => lineup.homeCount === sliderValue)
-    .filter(lineup => filterPlayers.length > 0 ? lineup.players.some((player: any) => filterPlayers.includes(player.player.id)) : true)
+    .filter(lineup => fixedPlayers.length > 0 ? lineup.players.some((player: any) => fixedPlayers.includes(player.player.id)) : true)
     .slice(0, Number(resultsValue));
   
     return (
