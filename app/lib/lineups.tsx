@@ -52,7 +52,8 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
                   <Card key={index} radius='none' shadow='none' isPressable onPress={() => handlePress(player.player.id)}>
                     <CardBody className='overflow-visible p-0'>
                       <Image alt='player picture'
-                        className='object-cover' radius='none'
+                        className={`object-cover ${fixedPlayers.includes(player.player.id) ? 'border-1 border-yellow-500' : ''}`}
+                        radius='sm'
                         width={60} height={90}
                         src={player.pictureUrl}
                       />
