@@ -11,13 +11,13 @@ export default function Game({ homeTeam, awayTeam, competition, isLineups }: any
                     <Image alt="home logo"
                         width={SIZE} height={SIZE}
                         src={homeTeam.pictureUrl}
-                        radius="sm"
+                        radius="none"
                     />
                     <div>VS</div>
                     <Image alt="away logo"
                         width={SIZE} height={SIZE}
                         src={awayTeam.pictureUrl}
-                        radius="sm"
+                        radius="none"
                     />
                 </div>
                 <div className="justify-self-start">{awayTeam.shortName}</div>
