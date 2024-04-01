@@ -10,7 +10,7 @@ export default function Game({ start, homeTeam, awayTeam, competition, isLineups
     const remainingMinutes = Math.floor(remainingTime / 60000);
 
     return (
-        <Card className="p-1 m-2">
+        <Card className="p-1">
             <CardHeader className="grid grid-cols-3 items-center gap-3">
                 <div className="justify-self-end">{homeTeam.shortName}</div>
                 <div className="flex justify-center items-center gap-3">

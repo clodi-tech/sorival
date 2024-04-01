@@ -33,9 +33,9 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
         minValue={0} maxValue={max}
         showOutline={true}
         onChange={(value) => setSliderValue(Number(value))}
-        className='max-w-xs m-2' defaultValue={max}
+        className='max-w-xs' defaultValue={max}
       />
-      <div className='flex flex-wrap gap-4 m-2'>
+      <div className='flex flex-wrap gap-4'>
         <Tabs key='bordered' variant='bordered' aria-label='filter results'
         color='primary'
         selectedKey={resultsValue} onSelectionChange={(key) => setResultsValue(String(key))}>
@@ -45,7 +45,7 @@ export default function Lineups({ gameCap, topLineups }: { gameCap: any, topLine
         </Tabs>
       </div>
       {filtered.map((lineup, index) => (
-        <Card key={index} className='p-1 m-2'>
+        <Card key={index} className='p-1'>
             <CardHeader className='flex justify-center items-center gap-2 p-2'>
 
                 {lineup.players.map((player: any, index: any) => (

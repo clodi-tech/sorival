@@ -6,7 +6,7 @@ export default async function Main() {
     const gamesWithFormation = await nextGames();
 
     const GameLink = ({ game }: { game: any }) => (
-        <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center rounded-2xl p-3 m-2'>
+        <Link href={`/${game.slug}/players`} key={game.id} className='flex justify-center items-center rounded-2xl p-3'>
             <Game start={game.game.date} competition={game.game.competition} homeTeam={game.game.homeTeam} awayTeam={game.game.awayTeam} isLineups={false} />
         </Link>
     );

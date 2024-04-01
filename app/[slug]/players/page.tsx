@@ -6,7 +6,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const {gameCap, date, competition, homeTeam, awayTeam, topLineups } = await startingLineup(params.slug);
 
     return (
-        <main>
+        <main className='gap-4'>
             <Game start={date} competition={competition} homeTeam={homeTeam} awayTeam={awayTeam} isLineups={true} />
             <Lineups topLineups={topLineups} gameCap={gameCap} />
         </main>
