@@ -5,6 +5,8 @@ import Header from "./home/header";
 import Footer from "./home/footer";
 import { Providers } from "./providers";
 
+import { Analytics } from "@vercel/analytics/react";
+
 const font = Rajdhani({ 
     subsets: ["latin"],
     weight: ['300']
@@ -30,6 +32,7 @@ export default function RootLayout({
                         <Footer />
                     </div>
                 </Providers>
+                <Analytics />
             </body>
         </html>
     );

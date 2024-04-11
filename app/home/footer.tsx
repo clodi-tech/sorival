@@ -1,14 +1,11 @@
-import { Link } from "@nextui-org/react";
-
 export default function Footer() {
     return (
-        <footer>
-            <div>a project by
-                <Link isBlock isExternal showAnchorIcon href="https://sonolibero.io" color="primary">
-                    libero
-                </Link>
-            </div>
-            <div>© 2092</div>
+        <footer className='p-4 gap-2 flex flex-col justify-center items-center'>
+          <div className="gap-1 flex">
+            <p>created by</p>
+            <a className="underline underline-offset-2" href='https://clodi.tech' target='_blank' rel="noopener">clodi</a>
+          </div>
+          <div>© 2092</div>
         </footer>
     );
 }
